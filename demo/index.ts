@@ -1,23 +1,32 @@
-import { linkComponent } from '~/core'
-import { generateCode } from '../core/generator'
+// import { linkComponent } from '~/core'
+import { Compiler } from '../core/compiler'
 
-const code = generateCode('jugar-demo', {
-  onAdopt() {
-    console.warn('adpoted')
-  },
-  onChange(name, oldValue, newValue) {
-    console.warn('diff', name, oldValue, newValue)
-  },
-  onConnect() {
-    console.warn('connected')
-  },
-  onDisconnect() {
-    console.error('disconnected')
-  },
-  observed: ['name', 'value'],
+const compiler = new Compiler('jugar-demo')
+compiler.define('getReady', () => {
+  console.log('ready')
+})
+compiler.define('clear', () => {
+  console.log('clear')
+})
+compiler.design('disabled', 'boolean')
+compiler.design('name', 'string')
+compiler.design('value', 'number')
+compiler.observe('name', (oldValue, newValue) => {
+  console.log(newValue, oldValue)
+})
+compiler.observe('value', (oldValue, newValue) => {
+  console.log(newValue, oldValue)
+})
+compiler.when('adopted', () => {
+  console.error('adopted')
+})
+compiler.when('disconnected', () => {
+  console.error('disconnected')
 })
 
 const $code: HTMLElement = document.getElementById('code')!
-$code.textContent = code
+$code.textContent = compiler.run()
 
-linkComponent(code)
+console.log(compiler)
+
+// linkComponent(code)
