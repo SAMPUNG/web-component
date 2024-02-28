@@ -1,5 +1,5 @@
 {
-  "name": "web-component",
+  "name": "@jugar/web-component",
   "private": false,
   "version": "0.0.1",
   "type": "module",
@@ -30,6 +30,22 @@
     "vite": "^5.0.8"
   },
   "dependencies": {
-    "buffer": "^6.0.3"
-  }
+    "buffer": "^6.0.3",
+    "reflect-metadata": "^0.2.1"
+  },
+  "description": "Web Component Code Generator.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SAMPUNG/web-component.git"
+  },
+  "keywords": [
+    "Web",
+    "Component"
+  ],
+  "author": "Maquia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SAMPUNG/web-component/issues"
+  },
+  "homepage": "https://github.com/SAMPUNG/web-component#readme"
 }

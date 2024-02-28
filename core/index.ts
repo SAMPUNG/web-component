@@ -1,2 +1,1 @@
-export * from './generator'
-export * from './linker'
+export * from './decorator'

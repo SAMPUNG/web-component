@@ -13,6 +13,10 @@
     "isolatedModules": true,
     "noEmit": true,
 
+    /** Decorator */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

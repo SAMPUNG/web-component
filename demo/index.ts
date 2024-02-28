@@ -1,32 +1,20 @@
-// import { linkComponent } from '~/core'
-import { Compiler } from '../core/compiler'
+import type { JugarElement } from '~/types'
 
-const compiler = new Compiler('jugar-demo')
-compiler.define('getReady', () => {
-  console.log('ready')
-})
-compiler.define('clear', () => {
-  console.log('clear')
-})
-compiler.design('disabled', 'boolean')
-compiler.design('name', 'string')
-compiler.design('value', 'number')
-compiler.observe('name', (oldValue, newValue) => {
-  console.log(newValue, oldValue)
-})
-compiler.observe('value', (oldValue, newValue) => {
-  console.log(newValue, oldValue)
-})
-compiler.when('adopted', () => {
-  console.error('adopted')
-})
-compiler.when('disconnected', () => {
-  console.error('disconnected')
-})
+import './web-component'
 
-const $code: HTMLElement = document.getElementById('code')!
-$code.textContent = compiler.run()
+const app = document.getElementById('app')!
 
-console.log(compiler)
+const component = document.createElement('web-component')
+component.textContent = 'hello,world'
 
-// linkComponent(code)
+app.appendChild(component)
+
+const model = (component as JugarElement).model
+
+model.demoBool = true
+model.demoNum = 3.4
+model.demoStr = 'hi'
+model.onclick = () => {
+  console.log('clicked once')
+  model.onclick = undefined
+}
