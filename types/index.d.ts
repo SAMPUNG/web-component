@@ -2,6 +2,7 @@ export interface ComponentInstance {
   oncreate?(): void
   onconnect?(): void
   ondisconnect?(): void
+  onupdate?(key: string, from: unknown, to: unknown): void
   new (...args: any[]): any
 }
 
@@ -9,11 +10,20 @@ export interface JugarElement extends HTMLElement {
   model: JuagrComponent
   onconnect?(): void
   ondisconnect?(): void
+  onupdate?(key: string, from: unknown, to: unknown): void
 }
 
 export type LifeCircle = 'onconnect' | 'oncreate' | 'ondisconnect'
 
 export type Primitive = 'string' | 'number' | 'boolean'
+
+export interface WebComponent {
+  elm: HTMLElement
+  oncreate?(): void
+  onconnect?(): void
+  ondisconnect?(): void
+  onupdate?(key: string, from: unknown, to: unknown): void
+}
 
 export declare function attr(name: string): {
   (target: Function): void

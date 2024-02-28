@@ -11,10 +11,20 @@ export function attr(name: string) {
 
 export function component(name: string) {
   return function <T extends ComponentInstance>(Source: T) {
+    const src = new Source()
+    const mapping: Record<string, string> = {}
+    Object.keys(src).map((prop: string) => {
+      const attr = Reflect.getMetadata(ATTRIBUTE, src, prop)
+      if (attr !== undefined) {
+        mapping[attr] = prop
+      }
+    })
+
     class JugarElement extends HTMLElement {
       model: T
       onconnect?(): void
       ondisconnect?(): void
+      onupdate?(key: string, from: unknown, to: unknown): void
       constructor() {
         super()
         const source = new Source()
@@ -26,12 +36,19 @@ export function component(name: string) {
         source.oncreate?.()
         this.onconnect = source.onconnect
         this.ondisconnect = source.ondisconnect
+        this.onupdate = source.onupdate
+      }
+      attributeChangedCallback(key: string, from: unknown, to: unknown) {
+        this.onupdate?.call(this.model, mapping[key], from, to)
       }
       connectedCallback() {
         this.onconnect?.call(this.model)
       }
       disconnectedCallback() {
         this.ondisconnect?.call(this.model)
+      }
+      static get observedAttributes() {
+        return Object.keys(mapping)
       }
     }
     customElements.define(name, JugarElement)

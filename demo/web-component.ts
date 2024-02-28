@@ -21,14 +21,18 @@ export class WebComponent {
   declare elm: HTMLElement
 
   onconnect() {
-    console.log('connected ===> ', this.elm.tagName)
+    console.log('connected')
   }
 
   oncreate() {
-    console.log('created ===> ', this.elm.tagName)
+    console.log('created')
   }
 
   ondisconnect() {
-    console.log('disconnected ===> ', this.elm.tagName)
+    console.log('disconnected')
+  }
+
+  onupdate(key: string, from: unknown, to: unknown) {
+    console.log('update ===> ', key, from, to)
   }
 }

@@ -13,8 +13,6 @@ export const createHandler = (elm: HTMLElement) => ({
     const attr = Reflect.getMetadata(ATTRIBUTE, target, prop) ?? prop
     const type = Reflect.getMetadata(DESIGN_TYPE, target, prop) ?? 'string'
 
-    console.log(prop, attr, type)
-
     switch (type) {
       case 'boolean': {
         return elm.hasAttribute(attr)
@@ -35,7 +33,6 @@ export const createHandler = (elm: HTMLElement) => ({
       return false
     }
 
-    console.log(prop, Reflect.getMetadata(LIFE_CIRCLE, target, prop))
     if (Reflect.getMetadata(LIFE_CIRCLE, target, prop)) {
       Reflect.set(target, prop, value)
       return true

@@ -17,4 +17,6 @@ model.demoStr = 'hi'
 model.onclick = () => {
   console.log('clicked once')
   model.onclick = undefined
+
+  component.setAttribute('demo-str', 'clicked')
 }
